@@ -410,7 +410,6 @@ void convertEditsToBasicData(
         write++;
         
         if(!edits[i].has_mod)   continue;
-        continue;
         
         rows[write].image     = edits[i].normed_mod_image;
         rows[write].features  = edits[i].mod_features;
@@ -425,9 +424,10 @@ void convertEditsToBasicData(
     batch.set(rows);
 }
 
-template<class Model>
-int editCurve(int init, int final, int step)
+template<class Model> vector< pair<double,double> >
+editCurve(int init, int final, int step)
 {
+    vector< pair<double, double> > results;
     srand(time(0));
     
     DataTable fullData;
@@ -455,6 +455,7 @@ int editCurve(int init, int final, int step)
             if(model.classify(it->features) == it->label)
                 correct++;
         }
+        results.push_back(pair<double,double>(train.size(), correct));
         cout << correct << endl;
     // abort?
         int oldsize = train.size();
@@ -478,20 +479,23 @@ int editCurve(int init, int final, int step)
     }
     cout << "DONE!" << endl;
     
-    return 0;
+    return results;
 }
 
-int editCurveLogistic(int init, int final, int step)
+vector< pair<double,double> >
+editCurveLogistic(int init, int final, int step)
 {
     return editCurve<LogisticModel>(init, final, step);
 }
 
-int editCurveKnn(int init, int final, int step)
+vector< pair<double,double> >
+editCurveKnn(int init, int final, int step)
 {
     return editCurve<KnnModel>(init, final, step);
 }
 
-int editCurveSVM(int init, int final, int step)
+vector< pair<double,double> >
+editCurveSVM(int init, int final, int step)
 {
     return editCurve<SvmModel>(init, final, step);
 }

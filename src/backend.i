@@ -34,9 +34,12 @@ activeCurveKnn(int init, int final, int step);
 std::vector< std::pair<double,double> >
 activeCurveSVM(int init, int final, int step);
 
-int editCurveLogistic(int init, int final, int step);
-int editCurveKnn(int init, int final, int step);
-int editCurveSVM(int init, int final, int step);
+std::vector< std::pair<double,double> >
+editCurveLogistic(int init, int final, int step);
+std::vector< std::pair<double,double> >
+editCurveKnn(int init, int final, int step);
+std::vector< std::pair<double,double> >
+editCurveSVM(int init, int final, int step);
 
 int getImageSize(); // in count of bytes needed for buffer
 

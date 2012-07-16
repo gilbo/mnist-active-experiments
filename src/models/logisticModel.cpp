@@ -152,7 +152,7 @@ void LogisticModel::predictClass(vector<double> &probs,
                                  const vector<double> &datum)
 {
     vector<double> scores(N_classes, 0.0);
-    
+    //cout << "beg ";
     double sumScore = 0.0;
     for(int c=0; c<N_classes; c++) {
         for(int f=0; f<N_features; f++)
@@ -160,11 +160,13 @@ void LogisticModel::predictClass(vector<double> &probs,
         scores[c] = exp(scores[c]);
         sumScore += scores[c];
     }
+    //cout << "mid ";
     
     // now normalize
     for(int c=0; c<N_classes; c++) {
         probs[c] = scores[c] / sumScore;
     }
+    //cout << "end" << endl;
 }
 
 int LogisticModel::classify(const vector<double> &datum)

@@ -1,0 +1,6 @@
+Again, green is SVM; blue KNN; red Log-Linear Multinomial.
+The excessive resolution curves are the edit curves.  This is an effect of interpolating before merging the curves due to differing x-values along the curves caused by the edits.  If an edit is performed, we add it to the instance count.
+
+Here, I use a simulation of edit learning.  If the model predicts the wrong value, then we ask for an edit from the actual value to the predicted value.  The exact closest instance in the full 60k MNIST training data is retrieved as the result of the edit.
+
+This shows how naively using edit data may actually hurt performance.
