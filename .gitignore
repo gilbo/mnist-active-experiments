@@ -1,0 +1,13 @@
+
+.DS_Store
+
+bin/*
+data/*
+depend/*
+obj/*
+python/wrappers/*
+python/obj/*
+python/*.py
+python/*.pyc
+python/*.so
+

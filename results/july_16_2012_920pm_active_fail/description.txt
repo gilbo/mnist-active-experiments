@@ -1,0 +1,7 @@
+
+
+Dotted Lines represent the results with active learning and solid lines represent the results with passive learning.  The top line in green is SVM, the blue is KNN(k=3), and the red is a log-linear multinomial model.
+
+Density data is ignored.  Top 2 entropy is used for the primary score and is modified by a diversity criterion based on distance from other examples in the selected batch.  The batch is designed greedily based on a combination of these two criteria.
+
+The main purpose of this logged result is to demonstrate that active learning can easily be detrimental when done "improperly."  It may turn out that I have missed some critical detail in making this work.  However, extrapolating based on current experience, I would have to say that trying to use active learning is a rather dangerous road to travel.
