@@ -290,7 +290,6 @@ void dumbBatchQuerySelection(
     DataTable &batch, DataTable &pool,
     Model &model, int num
 ) {
-    
     // score the remaining training examples for the active learner
     for(DataTable::iterator it = pool.begin(); it != pool.end(); it++) {
         double entropy = model.top2entropy(it->features);
@@ -303,6 +302,43 @@ void dumbBatchQuerySelection(
     
     // then extract the highest scoring rows from the table
     pool.removeTopScoreSubset(batch, num);
+}
+
+template<class Model>
+void dumbLimitedBatchQuerySelection(
+    DataTable &batch, DataTable &pool,
+    Model &model, int num
+) {
+    const int K = 4; // number of items to consider
+    DataTable subPool;
+    pool.copyRandomSubset(subPool, num*K);
+    vector<DataRow*> selection(num); // temp storage
+    
+    // choose the best option in each group of K items
+    DataTable::iterator it = subPool.begin();
+    for(int i=0; i<num; i++) {
+        double maxScore     = -DBL_MAX;
+        DataRow *maxRow     = NULL;
+        for(int j=0; j<K; j++) {
+            // compute the score...
+            double entropy = model.top2entropy(it->features);
+            double density = 1.0;
+            double score = entropy * density;
+            
+            if(score > maxScore) {
+                maxScore = score;
+                maxRow = &(*it);
+            }
+            it++;
+        }
+        selection[i] = maxRow;
+    }
+    
+    // extract the selected rows
+    vector<int> uids(num);
+    for(int i=0; i<num; i++)
+        uids[i] = selection[i]->uid;
+    pool.removeSubsetByUid(batch, uids);
 }
 
 template<class Model> std::vector< std::pair<double,double> >
@@ -342,8 +378,9 @@ activeCurve(int init, int final, int step)
         if(oldsize + step > final)  break;
     // sampling + re-training
         DataTable batch;
-        greedyBatchQuerySelection(batch, trainReserve, model, step);
+        //greedyBatchQuerySelection(batch, trainReserve, model, step);
         //dumbBatchQuerySelection(batch, trainReserve, model, step);
+        dumbLimitedBatchQuerySelection(batch, trainReserve, model, step);
         
         // now, add in the selected batch and re-train
         train.unionWith(batch);

@@ -33,11 +33,11 @@ public:
     bool loadTrain(int size = 0);
     bool loadTest(int size = 0);
     
-    void removeRandomSubset(DataTable &subset, int size);
+    void copyRandomSubset(DataTable &subset, int size);
     
+    void removeRandomSubset(DataTable &subset, int size);
     // scores must have been computed before invoking...
     void removeTopScoreSubset(DataTable &subset, int size);
-    
     void removeSubsetByUid(DataTable &subset, const vector<int> &uids);
     
     // does not check for duplicates

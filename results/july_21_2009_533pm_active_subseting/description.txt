@@ -1,0 +1,8 @@
+
+
+Dotted Lines represent the results with active learning and solid lines represent the results with passive learning.  The top line in green is SVM, the blue is KNN(k=3), and the red is a log-linear multinomial model.
+
+This is mostly the same test as the July 16th 2012 one.  However, instead of scoring the entire available pool of data, we select random sets of K=4 samples and then choose the best from amongst that pool.  We then repeat this selection strategy until we've generated a complete batch.  The diversity and density criteria are not used.
+
+This result demonstrates that by maintaining an element of randomness, we can avoid producing reliably worse results.  This is more encouraging.
+

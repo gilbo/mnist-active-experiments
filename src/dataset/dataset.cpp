@@ -146,6 +146,22 @@ bool DataTable::loadTest(int size)
     return true;
 }
 
+void DataTable::copyRandomSubset(DataTable &subset, int size)
+{
+    if(size > int(rows.size())) return;
+    
+    // first run a lottery
+    Lottery lottery(rows.size());
+    vector<int> subset_ids;
+    lottery.drawN(subset_ids, size);
+    
+    // now copy the rows comprising the subset
+    subset.rows.resize(size);
+    for(int i=0; i<size; i++) {
+        subset.rows[i] = rows[subset_ids[i]];
+    }
+}
+
 void DataTable::removeRandomSubset(DataTable &subset, int size)
 {
     if(size > int(rows.size())) return;

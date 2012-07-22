@@ -89,10 +89,10 @@ xs, means, errs = repeatExperiment(repetitions,
 pylab.plot(xs, means, 'r-')
 pylab.errorbar(xs, means, yerr=errs, fmt='ro')
 
-#xs, means, errs = repeatExperiment(repetitions,
-                                   #backend.activeCurveLogistic,
-xs, means, errs = repeatExperimentRegularize(repetitions,
-                                   backend.editCurveLogistic,
+xs, means, errs = repeatExperiment(repetitions,
+                                   backend.activeCurveLogistic,
+#xs, means, errs = repeatExperimentRegularize(repetitions,
+#                                   backend.editCurveLogistic,
                                    samp_init, samp_final, batch_size);
 pylab.plot(xs, means, 'r-.')
 pylab.errorbar(xs, means, yerr=errs, fmt='rs')
@@ -105,10 +105,10 @@ xs, means, errs = repeatExperiment(repetitions,
 pylab.plot(xs, means, 'g-')
 pylab.errorbar(xs, means, yerr=errs, fmt='go')
 
-#xs, means, errs = repeatExperiment(repetitions,
-                                   #backend.activeCurveSVM,
-xs, means, errs = repeatExperimentRegularize(repetitions,
-                                   backend.editCurveSVM,
+xs, means, errs = repeatExperiment(repetitions,
+                                   backend.activeCurveSVM,
+#xs, means, errs = repeatExperimentRegularize(repetitions,
+#                                   backend.editCurveSVM,
                                    samp_init, samp_final, batch_size);
 pylab.plot(xs, means, 'g-.')
 pylab.errorbar(xs, means, yerr=errs, fmt='gs')
@@ -121,10 +121,10 @@ xs, means, errs = repeatExperiment(repetitions,
 pylab.plot(xs, means, 'b-')
 pylab.errorbar(xs, means, yerr=errs, fmt='bo')
 
-#xs, means, errs = repeatExperiment(repetitions,
-                                   #backend.activeCurveKnn,
-xs, means, errs = repeatExperimentRegularize(repetitions,
-                                   backend.editCurveKnn,
+xs, means, errs = repeatExperiment(repetitions,
+                                   backend.activeCurveKnn,
+#xs, means, errs = repeatExperimentRegularize(repetitions,
+#                                   backend.editCurveKnn,
                                    samp_init, samp_final, batch_size);
 pylab.plot(xs, means, 'b-.')
 pylab.errorbar(xs, means, yerr=errs, fmt='bs')
